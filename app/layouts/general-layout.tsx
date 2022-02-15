@@ -3,7 +3,7 @@ import FlexBox from './flexbox';
 import Header from '../containers/header';
 // import Sidebar from '../containers/sidebar';
 import Footer from '../containers/footer';
-import { children } from '../../types/common-props';
+import { children } from '../types/common-props';
 
 interface GeneralProps {
   children: children

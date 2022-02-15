@@ -1,8 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 import FlexBox from './flexbox';
+// import styles from './styles.css';
+
 import { lightTheme } from '../styles/default-theme';
-import { children } from '../../types/common-props';
+import { children } from '../types/common-props';
 
 interface ContentProps {
   moduleTitle: string,

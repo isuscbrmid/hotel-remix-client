@@ -20,12 +20,9 @@ interface FlexBoxTypes {
 
 const FlexBox = styled.div<FlexBoxTypes>`
   display: flex;
-  className: ${({ className }) => className};
-  z-index: ${({ zIndex }) => zIndex};
   justify-content: ${({ justifyContent }) => justifyContent};
   align-items: ${({ alignItems }) => alignItems};
   flex-direction: ${({ direction }) => direction};
-  flex-wrap: ${({ flexWrap }) => flexWrap};
   min-height:${({ minHeight }) => minHeight};
   flex-grow: ${({ flexGrow }) => flexGrow};
   flex-shrink: ${({ flexShrink }) => flexShrink};

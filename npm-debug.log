@@ -1,0 +1,51 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/jesus.cabrera/.nvm/versions/node/v6.17.1/bin/node',
+1 verbose cli   '/Users/jesus.cabrera/.nvm/versions/node/v6.17.1/bin/npm',
+1 verbose cli   'view',
+1 verbose cli   '--json',
+1 verbose cli   'remix',
+1 verbose cli   'description',
+1 verbose cli   'dist-tags.latest',
+1 verbose cli   'homepage',
+1 verbose cli   'version' ]
+2 info using npm@3.10.10
+3 info using node@v6.17.1
+4 silly mapToRegistry name remix
+5 silly mapToRegistry using default registry
+6 silly mapToRegistry registry https://artifactory.dowjones.io/artifactory/api/npm/npm-virtual/
+7 silly mapToRegistry data Result {
+7 silly mapToRegistry   raw: 'remix',
+7 silly mapToRegistry   scope: null,
+7 silly mapToRegistry   escapedName: 'remix',
+7 silly mapToRegistry   name: 'remix',
+7 silly mapToRegistry   rawSpec: '',
+7 silly mapToRegistry   spec: 'latest',
+7 silly mapToRegistry   type: 'tag' }
+8 silly mapToRegistry uri https://artifactory.dowjones.io/artifactory/api/npm/npm-virtual/remix
+9 verbose request uri https://artifactory.dowjones.io/artifactory/api/npm/npm-virtual/remix
+10 verbose request always-auth set; sending authorization
+11 info attempt registry request try #1 at 11:42:07 AM
+12 verbose request id 739d906c76764f59
+13 http request GET https://artifactory.dowjones.io/artifactory/api/npm/npm-virtual/remix
+14 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 10.146.90.170:443
+15 info attempt registry request try #2 at 11:43:34 AM
+16 http request GET https://artifactory.dowjones.io/artifactory/api/npm/npm-virtual/remix
+17 info retry will retry, error on last attempt: Error: connect ETIMEDOUT 10.146.87.85:443
+18 info attempt registry request try #3 at 11:45:49 AM
+19 http request GET https://artifactory.dowjones.io/artifactory/api/npm/npm-virtual/remix
+20 verbose stack Error: connect ENETUNREACH 10.146.90.225:443
+20 verbose stack     at Object.exports._errnoException (util.js:1020:11)
+20 verbose stack     at exports._exceptionWithHostPort (util.js:1043:20)
+20 verbose stack     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1099:14)
+21 verbose cwd /Users/jesus.cabrera/Code/personal/hotel/hotel-remix
+22 error Darwin 20.5.0
+23 error argv "/Users/jesus.cabrera/.nvm/versions/node/v6.17.1/bin/node" "/Users/jesus.cabrera/.nvm/versions/node/v6.17.1/bin/npm" "view" "--json" "remix" "description" "dist-tags.latest" "homepage" "version"
+24 error node v6.17.1
+25 error npm  v3.10.10
+26 error code ENETUNREACH
+27 error errno ENETUNREACH
+28 error syscall connect
+29 error connect ENETUNREACH 10.146.90.225:443
+30 error If you need help, you may report this error at:
+30 error     <https://github.com/npm/npm/issues>
+31 verbose exit [ 1, true ]
