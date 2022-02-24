@@ -7,8 +7,13 @@ import {
   LinksFunction,
   ScrollRestoration
 } from "remix";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
 import type { MetaFunction } from "remix";
 import GeneralLayout from './layouts/general-layout';
+import GlobalContext from './containers/global-context'
 import globalStylesUrl from "./styles/global.css";
 
 export const meta: MetaFunction = () => {
@@ -24,6 +29,8 @@ export const links: LinksFunction = () => {
   ];
 };
 
+const queryClient = new QueryClient()
+
 export default function Root() {
   // get styles from context
   return (
@@ -36,12 +43,16 @@ export default function Root() {
         {typeof document === "undefined" ? "__STYLES__" : null}
       </head>
       <body>
-        <GeneralLayout>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === "development" && <LiveReload />}
-        </GeneralLayout>
+      <QueryClientProvider client={queryClient}>
+        <GlobalContext>
+          <GeneralLayout>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            {process.env.NODE_ENV === "development" && <LiveReload />}
+          </GeneralLayout>
+        </GlobalContext>
+      </QueryClientProvider>
       </body>
     </html>
   );
