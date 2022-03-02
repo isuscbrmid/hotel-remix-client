@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
     { to: '/cashflow', text: 'Cashflow' },
     { to:'/bookings', text:'Bookings' }
   ]
-  const logOut = React.useCallback(() => alert('loging out'), []);
+  const logOut = React.useCallback(() => alert('logging out'), []);
   
   return (
     <FlexBox
