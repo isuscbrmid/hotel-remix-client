@@ -1,75 +1,83 @@
-import React from "react";
-import axios from "axios";
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider
-} from "react-query";
+import React, { Fragment } from "react";
+import { useTable } from 'react-table';
+import Booking from '../../containers/booking';
+import Loader from '../../components/loader';
+import StyledTable from '../../components/table/styled-table';
+import { getBookings } from '../../sources/bookings';
+import BookingTableMapper from '../../mappers/booking-table';
 
-const queryClient = new QueryClient();
 
-type Booking = {
-  id: number,
-  booking_method: string,
-  name: string,
-  last_name: string,
-  adults: number,
-  childs: number,
-  room: null
-};
+const Bookings = () => {
+  const [bookingId, setBookingId] = React.useState<number | undefined>(undefined);
+  const { status, data, error, isFetching } = getBookings();
+  
+  const columns = React.useMemo(() => BookingTableMapper, [])
 
-function useBookings() {
-  return useQuery(
-    "bookings",
-    async (): Promise<Array<Booking>> => {
-      const { data } = await axios.get(
-        "https://posada-del-angel-mid.herokuapp.com/bookings"
-      );
-      return data;
-    }
-  );
-}
+  const tableInstance = useTable({ columns, data: data || [] })
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = tableInstance
 
-function BookingLists({
-  setBookingId,
-}: {
-  setBookingId: React.Dispatch<React.SetStateAction<number>>;
-}) {
-  const queryClient = useQueryClient();
-  const { status, data, error, isFetching } = useBookings();
-
+  const onClickRow = (rowId:number) => setBookingId(rowId);
   return (
-    <div>
-      <h1>Bookings</h1>
-      <br />
+    <Fragment>
       <div>
-        {status === "loading" ? (
-          "Loading..."
-        ) : error instanceof Error ? (
-          <span>Error: {error.message}</span>
-        ) : (
-          <>
-            <div>
-              {data?.map((booking) => (
-                <p key={booking.id}>booking</p>
-              ))}
-            </div>
-            <div>{isFetching ? "Restarting due to changes..." : " "}</div>
-          </>
-        )}
+        <h1>Bookings</h1>
+        <div>
+          {status === "loading" ? (
+            <Loader />
+          ) : error instanceof Error ? (
+            <span>Error: {error.message}</span>
+          ) : !!data && (
+            <>
+              <StyledTable>
+              <table {...getTableProps()}>
+                <thead>
+                  {
+                  headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                      {
+                      headerGroup.headers.map(column => (
+                        <th {...column.getHeaderProps()}>
+                          {
+                          column.render('Header')}
+                        </th>
+                      ))}
+                    </tr>
+                  ))}
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                  {
+                  rows.map(row => {
+                    prepareRow(row)
+                    return (
+                      <tr {...{...row.getRowProps(), onClick: () => onClickRow(row.original.id)}}>
+                        {
+                        row.cells.map(cell => {
+                          return (
+                            <td {...cell.getCellProps()}>
+                              {
+                              cell.render('Cell')}
+                            </td>
+                          )
+                        })}
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+              </StyledTable>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+      <Booking id={bookingId} />
+    </Fragment>
   );
 }
 
-export default function Bookings() {
-
-  const [bookingId, setBookingId] = React.useState(-1);
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <BookingLists setBookingId={setBookingId} />
-    </QueryClientProvider>
-  );
-}
+export default Bookings;

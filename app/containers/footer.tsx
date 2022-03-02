@@ -12,10 +12,10 @@ const Footer = (props: FooterProps) => {
   return (
     <FlexBox {...props} >
       <FlexBox padding='2px 10px'>
-        Hotel Management, 2020 &copy;.
+        Hotel Management, 2020 &copy;
       </FlexBox>
       <FlexBox padding='2px 10px'>
-        Hotel Posada del Angel.
+        Hotel Posada del Angel
       </FlexBox>
     </FlexBox >
   )
