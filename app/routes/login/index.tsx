@@ -1,86 +1,49 @@
-import { useState } from "react";
-import styled from "styled-components";
-import {
-  ButtonContent,
-  Data,
-  FormGroup,
-  Inner,
-  Input,
-  Label,
-} from "~/components/form";
-import Modal from "~/components/modal";
+import React from "react";
+import { FormGroup, Input, Label } from "../../components/form";
+import { Modal } from "../../components/modal";
+import useModal from "../../components/modal/use-modal";
 import { useLogin } from "../../containers/global-context/authentication-wrapper";
 
-export default function Bookings() {
+const Bookings = () => {
   const login = useLogin();
   const loginAction = () => {
     login("admin535", "535");
   };
+  const { showModal, toggle } = useModal();
 
-  const [stateModal, changeStateModal] = useState(false);
   return (
-    <div>
+    <React.Fragment>
       <div>
-        <h1>Login</h1>
+        <div>
+          <h1>Login</h1>
 
-        <ButtonContainer>
-          <ShowButton onClick={() => changeStateModal(!changeStateModal)}>
-            Login
-          </ShowButton>
-        </ButtonContainer>
+          <button onClick={toggle}>Login</button>
 
-        <Modal state={stateModal} changeState={changeStateModal}>
-          <FormGroup>
-            <Data>
-              <Label htmlFor="">User</Label>
-              <Input type="text" placeholder="Username" required />
-            </Data>
-            <Data>
-              <Label htmlFor="">Password</Label>
-              <Input type="password" placeholder="Password" required />
-            </Data>
-            <ButtonContent>
-              <Inner></Inner>
-              <ButtonLogin onClick={() => changeStateModal(!changeStateModal && loginAction)}>
-                login
-              </ButtonLogin>
-            </ButtonContent>
-          </FormGroup>
-        </Modal>
+          <Modal 
+            open={showModal} 
+            onClose={toggle}
+            headerText="Welcome!"
+          >
+            <FormGroup>
+              <div className="data">
+                <Label>User</Label>
+                <Input type="text" placeholder="User name" />
+              </div>
+              <div className="data">
+                <Label>Password</Label>
+                <Input type="password" placeholder="Password" />
+              </div>
+              <div className="btn">
+                {/** add the button here */}
+                {/* <button onClick={loginAction}>login</button> */}
+              </div>
+            </FormGroup>
+            <button onClick={loginAction}>login</button>
+          </Modal>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
-}
+};
 
-const ButtonContainer = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const ShowButton = styled.button`
-  display: block;
-  padding: 10px 30px;
-  color: #292929;
-  border: 1px solid #ccc;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  font-family: sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-`;
-
-const ButtonLogin = styled.button`
-  height: 100%;
-  width: 100%;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-`;
+export default Bookings;
