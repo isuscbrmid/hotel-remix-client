@@ -2,12 +2,34 @@ import styled from "styled-components";
 
 export const FormGroup = styled.form`
   margin-top: -20px;
-`;
 
-export const Data = styled.div`
-  height: 48px;
-  width: 100%;
-  margin: 40px 0;
+  .data {
+    height: 48px;
+    width: 100%;
+    margin: 40px 0;
+  }
+
+  .btn {
+    margin: 30px 0;
+    height: 45px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .btn button {
+    height: 100%;
+    width: 100%;
+    background: #000;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
 `;
 
 export const Label = styled.label`

@@ -6,7 +6,6 @@ import StyledTable from '../../components/table/styled-table';
 import { getBookings } from '../../sources/bookings';
 import BookingTableMapper from '../../mappers/booking-table';
 
-
 const Bookings = () => {
   const [bookingId, setBookingId] = React.useState<number | undefined>(undefined);
   const { status, data, error, isFetching } = getBookings();

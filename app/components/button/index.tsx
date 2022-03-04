@@ -5,11 +5,11 @@ import { lightTheme } from '../../styles/default-theme';
 interface ButtonProps {
   children: ReactNode,
   onClick(): any,
-  style: keyof typeof lightTheme.button
+  type: keyof typeof lightTheme.button
 };
 
-const Button = ({ children, style, ...props }: ButtonProps) => {
-  const styledProps = lightTheme.button[style];
+const Button = ({ children, type, ...props }: ButtonProps) => {
+  const styledProps = lightTheme.button[type];
   return (
     <StyledButton {...styledProps} {...props}>
       { children}
@@ -18,7 +18,7 @@ const Button = ({ children, style, ...props }: ButtonProps) => {
 };
 
 Button.defaultProps = {
-  style: 'primary',
+  type: 'primary',
 };
 
 export default Button;
